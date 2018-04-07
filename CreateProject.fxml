@@ -6,11 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateProjectController">
    <children>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="←Back" />
-      <Button fx:id="nextButton" layoutX="494.0" layoutY="331.0" mnemonicParsing="false" text="Next →" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backToSelection" text="←Back" />
+      <Button fx:id="nextButton" layoutX="494.0" layoutY="331.0" mnemonicParsing="false" onAction="#newProject" text="Next →" />
       <Label fx:id="titleLabel" layoutX="218.0" layoutY="13.0" text="Create New Project...">
          <font>
             <Font size="18.0" />
@@ -26,11 +25,11 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="projectNameTextbox" layoutX="137.0" layoutY="76.0" />
-      <TextField fx:id="manufacturerTextbox" layoutX="137.0" layoutY="132.0" />
-      <TextField fx:id="modelTextbox" layoutX="137.0" layoutY="188.0" />
-      <TextField fx:id="chassisTextBox" layoutX="137.0" layoutY="240.0" />
-      <TextField fx:id="modelYearTextbox" layoutX="137.0" layoutY="298.0" />
-      <Button fx:id="dismissButton" layoutX="482.0" layoutY="157.0" mnemonicParsing="false" text="Dismiss" />
+      <TextField fx:id="projectNameTextbox" layoutX="137.0" layoutY="76.0" onAction="#handleProjectName" />
+      <TextField fx:id="manufacturerTextbox" layoutX="137.0" layoutY="132.0" onAction="#handleManufacturer" />
+      <TextField fx:id="modelTextbox" layoutX="137.0" layoutY="188.0" onAction="#handleModel" />
+      <TextField fx:id="chassisTextBox" layoutX="137.0" layoutY="240.0" onAction="#handleChassis" />
+      <TextField fx:id="modelYearTextbox" layoutX="137.0" layoutY="298.0" onAction="#handleModelYear" />
+      <Button fx:id="dismissButton" layoutX="482.0" layoutY="157.0" mnemonicParsing="false" onAction="#dismissWarning" text="Dismiss" />
    </children>
 </AnchorPane>

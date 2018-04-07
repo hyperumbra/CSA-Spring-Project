@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class CreateProjectController {
 
@@ -21,6 +23,16 @@ public class CreateProjectController {
 	public CreateProjectController() {
 		
 	}
+	
+	//Variables used within the Screen
+	String projectName = "";
+	String manufacturer = "";
+	String model = "";
+	String chassisCode = "";
+	int modelYear = 0;
+	
+	//Creates an Observable List to more easily work with the data
+	ObservableList<Car> Car = FXCollections.observableArrayList();
 	
 	//Fields for the scene
 	//Buttons
@@ -81,10 +93,63 @@ public class CreateProjectController {
 		dismissButton.setVisible(false);
 	}
 	
+	//
+	@FXML
+	private void handleProjectName() {
+		projectName = projectNameTextbox.getText();
+	}
+
+	//
+	@FXML
+	private void handleManufacturer() {
+		manufacturer = manufacturerTextbox.getText();
+	}
+	
+	//
+	@FXML
+	private void handleModel() {
+		model = modelTextbox.getText();
+	}
+
+	//
+	@FXML
+	private void handleChassis() {
+		chassisCode = chassisTextbox.getText();
+	}
+
+	//
+	@FXML
+	private void handleModelYear() {
+		String modelYearString = modelYearTextbox.getText();
+		modelYear = Integer.parseInt(modelYearString);
+	}
 	//Adds the new Project Details to the Database
 	@FXML
 	private void newProject() {
-		//Do Your Database Magic Here
+		//Checks if the required fields are populated
+		//if(((projectNameTextbox.getText() == "") == false)&&((manufacturerTextbox.getText() == "") == false)&&((modelTextbox.getText() == "") == false)) {
+		if((projectNameTextbox.getText().isEmpty() == false)&&(manufacturerTextbox.getText().isEmpty() == false)&&(modelTextbox.getText().isEmpty() == false)){
+			//Adds the data taken from the user to the List
+			Car.add(new Car(projectName, manufacturer, model, chassisCode, modelYear));
+		}
+		else {
+			//Changes the text of the Required Labels
+			projectNameLabel.setText("*Project Name");
+			manufacturerLabel.setText("*Manufacturer");
+			modelLabel.setText("*Model");
+			
+			//Changes the color of the Required Labels
+			projectNameLabel.setTextFill(javafx.scene.paint.Color.RED);
+			manufacturerLabel.setTextFill(javafx.scene.paint.Color.RED);
+			modelLabel.setTextFill(javafx.scene.paint.Color.RED);
+			
+			//Displays the warning
+			warningLabel.setVisible(true);
+			dismissButton.setVisible(true);
+			
+			//Flashes warning
+			//flashWarning();
+		}
 	}
 	
 	//Flashes the warning label while it's visible
@@ -126,7 +191,7 @@ public class CreateProjectController {
 	@FXML
 	private void backToSelection() throws IOException {
 		Stage stage = (Stage)backButton.getScene().getWindow();
-		Scene selectProjectScene = new Scene(FXMLLoader.load(getClass().getResource("/CreateProject.fxml")));
+		Scene selectProjectScene = new Scene(FXMLLoader.load(getClass().getResource("SelectProject.fxml")));
 		stage.setScene(selectProjectScene);
 	}
 	
