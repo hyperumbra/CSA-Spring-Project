@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Observable;
-
+import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Platform;
@@ -44,10 +44,10 @@ public class ProjectViewController{
 	//Variables used in the Scene
 	String partType = "";
 	String partName = "";
-	String brandName = "";
-	String itemID = "";
-	String material = "";
-	double price = 0;
+	String brandName = "N/A";
+	String itemID = "N/A";
+	String material = "N/A";
+	String price = "";
 	
 	//Creates Observable Lists to be used within the program
 	ObservableList<Part> PartList = FXCollections.observableArrayList();
@@ -59,6 +59,7 @@ public class ProjectViewController{
 			"Supercharger", "Intercooler", "Wastegate", "Miscellaneous Piping");
 	
 	//Creating a number that indexes the PartList
+	int partListIndex = 0;
 	
 	//Fields for the scene
 	//Buttons
@@ -109,8 +110,8 @@ public class ProjectViewController{
 	@FXML
 	private TextField materialText;
 	@FXML
-	private TextField costText;
-	
+	private TextField priceText;
+
 	//ChoiceBox
 	@FXML
 	private ChoiceBox<String> partTypeChoice;
@@ -157,7 +158,7 @@ public class ProjectViewController{
 	@FXML
 	private TableColumn<Part, String> materialColumn;
 	@FXML
-	private TableColumn<Part, Double> priceColumn;
+	private TableColumn<Part, String> priceColumn;
 	
 	@FXML
 	private void initialize() {
@@ -190,12 +191,12 @@ public class ProjectViewController{
 		partTypeChoice.setItems(PartType);
 		
 		//Sets the data that each column receives from each Part from the Observable List and SQL Table
-		partTypeColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("partType"));
-		partNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("partName"));
-		brandNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("brandName"));
-		itemIDColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("itemID"));
-		materialColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("material"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
+		partTypeColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("PartType"));
+		partNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("PartName"));
+		brandNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("BrandName"));
+		itemIDColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("ItemID"));
+		materialColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("Material"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("Price"));
 		
 		//Makes sure the user cannot edit the contents of the table
 		partListTable.setEditable(false);
@@ -207,7 +208,7 @@ public class ProjectViewController{
 	//
 	@FXML
 	private void handlePartType() {
-		partType = partTypeChoice.getSelectionModel().getSelectedItem().toString();
+		partType = partTypeChoice.getValue();
 	}
 
 	//
@@ -237,16 +238,20 @@ public class ProjectViewController{
 	//
 	@FXML
 	private void handlePrice() {
-		String priceString = costText.getText();
-		price = Double.parseDouble(priceString);
+		price = priceText.getText();
 	}
 	
 	//
 	@FXML
 	private void newPart() {
 		//
-		if((partTypeChoice.getSelectionModel().getSelectedItem().toString().isEmpty() == false)&&(partNameText.getText().isEmpty() == false)) {
-			PartList.add(new Part(partType, partName, brandName, itemID, material, price));
+		if((partTypeChoice.getValue().isEmpty() == false)&&(partNameText.getText().isEmpty() == false)) {
+			//
+			PartList.add(partListIndex, new Part(partType, partName, brandName, itemID, material, price));
+			partListIndex++;
+			
+			//
+			partListTable.setItems(PartList);
 		}
 		else {
 			//Changes the text of the Required labels
@@ -282,6 +287,30 @@ public class ProjectViewController{
 	@FXML
 	private void quitProject() {
 		Platform.exit();
+	}
+	
+	//
+	@FXML
+	private void routeGoogle() {
+		webEngine.load("https://www.google.com");
+	}
+	
+	//
+	@FXML
+	private void routeAmazon() {
+		webEngine.load("https://www.amazon.com");
+	}
+	
+	//
+	@FXML
+	private void routeEBay() {
+		webEngine.load("https://www.ebay.com/b/Auto-Parts-and-Vehicles/6000/bn_1865334");
+	}
+	
+	//
+	@FXML
+	private void routeCarPart() {
+		webEngine.load("http://www.car-part.com");
 	}
 	
 }

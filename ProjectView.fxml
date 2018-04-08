@@ -26,13 +26,12 @@
                         <Label fx:id="brandNameLabel" layoutX="35.0" layoutY="155.0" text="Brand Name" />
                         <Label fx:id="itemIDLabel" layoutX="35.0" layoutY="208.0" text="Item ID" />
                         <Label fx:id="materialLabel" layoutX="35.0" layoutY="266.0" text="Material" />
-                        <Label fx:id="costlabel" layoutX="35.0" layoutY="323.0" text="Cost" />
-                        <TextField fx:id="partNameText" layoutX="146.0" layoutY="97.0" onAction="#handlePartName" />
-                        <TextField fx:id="brandNameText" layoutX="146.0" layoutY="151.0" onAction="#handleBrandName" />
-                        <TextField fx:id="itemIDText" layoutX="146.0" layoutY="204.0" onAction="#handleItemID" />
-                        <TextField fx:id="materialText" layoutX="146.0" layoutY="262.0" onAction="#handleMaterial" />
-                        <TextField fx:id="costText" layoutX="146.0" layoutY="319.0" onAction="#handlePrice" />
-                        <ChoiceBox fx:id="partTypeChoice" layoutX="146.0" layoutY="37.0" onMouseClicked="#handlePartType" prefWidth="150.0" />
+                        <Label fx:id="priceLabel" layoutX="35.0" layoutY="323.0" text="Price" />
+                        <TextField fx:id="partNameText" layoutX="146.0" layoutY="97.0" onAction="#handlePartName" onKeyPressed="#handlePartName" onKeyReleased="#handlePartName" onKeyTyped="#handlePartName" />
+                        <TextField fx:id="brandNameText" layoutX="146.0" layoutY="151.0" onAction="#handleBrandName" onKeyPressed="#handleBrandName" onKeyReleased="#handleBrandName" onKeyTyped="#handleBrandName" />
+                        <TextField fx:id="itemIDText" layoutX="146.0" layoutY="204.0" onAction="#handleItemID" onKeyPressed="#handleItemID" onKeyReleased="#handleItemID" onKeyTyped="#handleItemID" />
+                        <TextField fx:id="materialText" layoutX="146.0" layoutY="262.0" onAction="#handleMaterial" onKeyPressed="#handleMaterial" onKeyReleased="#handleMaterial" onKeyTyped="#handleMaterial" />
+                        <ChoiceBox fx:id="partTypeChoice" layoutX="146.0" layoutY="37.0" onMouseClicked="#handlePartType" onMouseExited="#handlePartType" onMousePressed="#handlePartType" onMouseReleased="#handlePartType" prefWidth="150.0" />
                         <Button fx:id="addPartButton" layoutX="453.0" layoutY="319.0" mnemonicParsing="false" onAction="#newPart" prefHeight="25.0" prefWidth="78.0" text="Add" />
                         <Button fx:id="dismissButton" layoutX="453.0" layoutY="151.0" mnemonicParsing="false" onAction="#dismissWarning" prefHeight="25.0" prefWidth="78.0" text="Dismiss" />
                         <Label fx:id="warningLabel" layoutX="394.0" layoutY="41.0" prefHeight="108.0" prefWidth="176.0" text="Warning! You must complete the required fields to continue!" textAlignment="CENTER" wrapText="true">
@@ -40,6 +39,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <TextField fx:id="priceText" layoutX="146.0" layoutY="319.0" onKeyPressed="#handlePrice" onKeyReleased="#handlePrice" onKeyTyped="#handlePrice" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -70,10 +70,10 @@
                      <children>
                         <HBox fx:id="hBox" alignment="CENTER" layoutX="6.0" layoutY="12.0" prefHeight="54.0" prefWidth="592.0">
                            <children>
-                              <Button fx:id="googleButton" mnemonicParsing="false" text="Google.com" translateX="-75.0" />
-                              <Button fx:id="amazonButton" mnemonicParsing="false" text="Amazon.com" translateX="-25.0" />
-                              <Button fx:id="eBayButton" mnemonicParsing="false" text="eBay.com" translateX="25.0" />
-                              <Button fx:id="carpartButton" mnemonicParsing="false" text="Car-Part.com" translateX="50.0" />
+                              <Button fx:id="googleButton" mnemonicParsing="false" onAction="#routeGoogle" text="Google.com" translateX="-75.0" />
+                              <Button fx:id="amazonButton" mnemonicParsing="false" onAction="#routeAmazon" text="Amazon.com" translateX="-25.0" />
+                              <Button fx:id="eBayButton" mnemonicParsing="false" onAction="#routeEBay" text="eBay.com" translateX="25.0" />
+                              <Button fx:id="carpartButton" mnemonicParsing="false" onAction="#routeCarPart" text="Car-Part.com" translateX="50.0" />
                            </children>
                         </HBox>
                         <WebView fx:id="internet" layoutX="14.0" layoutY="78.0" prefHeight="291.0" prefWidth="579.0" zoom="0.0" />
