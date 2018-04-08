@@ -208,7 +208,7 @@ public class ProjectViewController{
 	//
 	@FXML
 	private void handlePartType() {
-		partType = partTypeChoice.getValue();
+		partType = partTypeChoice.getValue().toString();
 	}
 
 	//
@@ -238,6 +238,9 @@ public class ProjectViewController{
 	//
 	@FXML
 	private void handlePrice() {
+		if(!priceText.getText().matches("\\d*")) {
+			priceText.setText(priceText.getText().replaceAll("[^\\d]", ""));
+		}
 		price = priceText.getText();
 	}
 	
@@ -245,15 +248,30 @@ public class ProjectViewController{
 	@FXML
 	private void newPart() {
 		//
-		if((partTypeChoice.getValue().isEmpty() == false)&&(partNameText.getText().isEmpty() == false)) {
+		if((!partTypeChoice.getValue().isEmpty())&&(!partNameText.getText().isEmpty())) {
 			//
 			PartList.add(partListIndex, new Part(partType, partName, brandName, itemID, material, price));
 			partListIndex++;
 			
 			//
 			partListTable.setItems(PartList);
+			
+			//
+			partNameText.setText("");
+			brandNameText.setText("");
+			itemIDText.setText("");
+			materialText.setText("");
+			priceText.setText("");
 		}
 		else {
+			
+			//
+			partNameText.setText("");
+			brandNameText.setText("");
+			itemIDText.setText("");
+			materialText.setText("");
+			priceText.setText("");
+			
 			//Changes the text of the Required labels
 			partTypeLabel.setText("*Part Type");
 			partNameLabel.setText("*Part Name");
