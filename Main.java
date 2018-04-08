@@ -1,4 +1,3 @@
-
 package application;
 	
 import javafx.application.Application;
@@ -41,7 +40,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			
 			//Point the loader at the FXML file
-			loader.setLocation(Main.class.getResource("/application/SelectProject.fxml"));
+			loader.setLocation(Main.class.getResource("/application/ProjectView.fxml"));
 			
 			//Set the Pane layout field
 			selectProject = (AnchorPane) loader.load();
@@ -53,7 +52,8 @@ public class Main extends Application {
 			//scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			
 			//Giving the controller access to the main program
-			SelectProjectController controller = loader.getController();
+			//SelectProjectController controller = loader.getController();
+			ProjectViewController controller = loader.getController();
 			
 			//Put the scene onto the stage
 			primaryStage.setScene(scene);

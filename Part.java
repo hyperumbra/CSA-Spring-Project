@@ -1,8 +1,9 @@
 package application;
 
-public abstract class Part {
+public class Part {
 
 	//Fields
+	String partType;
 	String partName;
 	String brandName;
 	String itemID;
@@ -11,6 +12,7 @@ public abstract class Part {
 	
 	//Default Constructor
 	Part(){
+		partType = "";
 		partName = "";
 		brandName = "";
 		itemID = "";
@@ -19,7 +21,8 @@ public abstract class Part {
 	}
 	
 	//Full Constructor
-	Part(String partName, String brandName, String itemID, String material, double price){
+	Part(String partType, String partName, String brandName, String itemID, String material, double price){
+		this.partType = partType;
 		this.partName = partName;
 		this.brandName = brandName;
 		this.itemID = itemID;

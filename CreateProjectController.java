@@ -125,12 +125,19 @@ public class CreateProjectController {
 	}
 	//Adds the new Project Details to the Database
 	@FXML
-	private void newProject() {
+	private void newProject() throws IOException {
 		//Checks if the required fields are populated
 		//if(((projectNameTextbox.getText() == "") == false)&&((manufacturerTextbox.getText() == "") == false)&&((modelTextbox.getText() == "") == false)) {
 		if((projectNameTextbox.getText().isEmpty() == false)&&(manufacturerTextbox.getText().isEmpty() == false)&&(modelTextbox.getText().isEmpty() == false)){
 			//Adds the data taken from the user to the List
 			Car.add(new Car(projectName, manufacturer, model, chassisCode, modelYear));
+			
+			//SQL Stuff
+			
+			//Changes Scene
+			Stage stage = (Stage)nextButton.getScene().getWindow();
+			Scene selectProjectScene = new Scene(FXMLLoader.load(getClass().getResource("ProjectView.fxml")));
+			stage.setScene(selectProjectScene);
 		}
 		else {
 			//Changes the text of the Required Labels
@@ -146,9 +153,6 @@ public class CreateProjectController {
 			//Displays the warning
 			warningLabel.setVisible(true);
 			dismissButton.setVisible(true);
-			
-			//Flashes warning
-			//flashWarning();
 		}
 	}
 	
